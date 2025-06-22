@@ -15,5 +15,15 @@ app.get("/", (req: Request, res: Response) => {
 app.use('/api/books', bookRoutes)
 app.use('/api/borrow', borrowRoutes)
 
+// Not Found route 
+app.use((req: Request, res: Response, next: Function) => {
+  res.status(404).json({
+    success: false,
+    message: 'API endpoint not found',
+    error: `Route ${req.originalUrl} does not exist`,
+  });
+});
+
+
 app.use(globalErrorHandler)
 export default app

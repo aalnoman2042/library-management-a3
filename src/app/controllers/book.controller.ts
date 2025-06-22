@@ -7,6 +7,9 @@ import { error } from "console";
 export const createBook = async (req: Request, res: Response) => {
   try {
     const book = await Book.create(req.body);
+    if(book.copies === 0){
+      book.available = false
+    }
 
     res.status(201).json({
       success: true,

@@ -1,0 +1,19 @@
+import express, { Application, Request, Response } from "express";
+import { bookRoutes } from "./app/routes/book.route";
+import { borrowRoutes } from "./app/routes/borrow.route";
+import globalErrorHandler from "./globalErrorHandler";
+
+const app: Application = express()
+
+// app.use(cors())
+app.use(express.json())
+
+app.get("/", (req: Request, res: Response) => {
+  res.send("welcome to library managment");
+});
+
+app.use('/api/books', bookRoutes)
+app.use('/api/borrow', borrowRoutes)
+
+app.use(globalErrorHandler)
+export default app
